@@ -112,22 +112,6 @@
             font-size: 0.95rem;
         }
 
-        /* 🎵 Music Player Bar */
-        .music-card {
-            background: white;
-            border-radius: 20px;
-            padding: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-        .music-card p {
-            font-size: 0.85rem;
-            color: #ff5277;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
         /* Video Player Frame Container */
         .video-box {
             background: white;
@@ -228,21 +212,7 @@
             เรารักกันมาแล้ว... 💕
         </div>
 
-        <!-- 🎵 กล่องเล่นเพลงรัก PUN - Proof -->
-        <div class="music-card">
-            <p>🎶 เพลงของเรา: PUN - รักให้เธอได้รู้ (Proof)</p>
-            <iframe 
-                id="bg-music"
-                width="100%" 
-                height="80" 
-                src="" 
-                title="PUN - Proof" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
-            </iframe>
-        </div>
-
-        <!-- 🎥 กล่องฝังวิดีโอ YouTube Shorts -->
+        <!-- 🎥 กล่องฝังวิดีโอ YouTube Shorts (เล่นจบแล้วหยุด ไม่วนซ้ำ) -->
         <div class="video-box">
             <iframe 
                 id="yt-player"
@@ -262,7 +232,7 @@
         <button class="btn-letter" onclick="openModal()">📩 กดเปิดจดหมายลับตรงนี้สิ</button>
     </div>
 
-    <!-- 💌 ป๊อปอัปจดหมายลับ -->
+    <!-- 💌 ป๊อปอัปจดหมายลับ + ฝังเสียงเพลง PUN (เริ่มเล่น 1:04) -->
     <div id="secret-modal" class="modal">
         <div class="modal-content">
             <h3 style="color: #ff5277; margin-bottom: 10px;">ถึงคุณอัจราพร 🌸</h3>
@@ -272,6 +242,18 @@
                 <i>"แค่อยากให้เธอได้รู้ความรักเป็นยังไง<br>
                 ให้เธอมองทางนี้ baby look into my eyes..." ❤️</i>
             </div>
+
+            <!-- 🎵 iframe เพลงของ PUN ซ่อนไว้ (เริ่มที่ 64 วินาที) -->
+            <iframe 
+                id="pun-music"
+                width="100%" 
+                height="80" 
+                src="" 
+                title="PUN - Proof" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                style="border-radius: 12px; margin-bottom: 15px; display: none;">
+            </iframe>
 
             <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 15px;">
                 ขอบคุณสำหรับทุกๆ รอยยิ้ม ความเข้าอกเข้าใจ และความรักที่มีให้กันเสมอมานะ รักนะครับ ❤️
@@ -290,19 +272,31 @@
                 document.getElementById('lock-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 
-                // 1. โหลดวิดีโอ Shorts
+                // โหลดวิดีโอ Shorts (ปิด loop=1 เพื่อให้เล่นรอบเดียวแล้วหยุด ไม่วนซ้ำ)
                 const player = document.getElementById('yt-player');
-                player.src = "https://www.youtube-nocookie.com/embed/Ivi69MXK8gA?autoplay=1&playlist=Ivi69MXK8gA&loop=1&controls=1";
-
-                // 2. โหลดเพลง PUN - รักให้เธอได้รู้ (Proof) เริ่มท่อนฮุกที่ 0:34
-                const music = document.getElementById('bg-music');
-                music.src = "https://www.youtube.com/embed/1OMZrYHIim8?autoplay=1&start=34";
+                player.src = "https://www.youtube-nocookie.com/embed/Ivi69MXK8gA?autoplay=1&controls=1";
 
                 createHearts();
                 startTimer();
             } else {
                 document.getElementById('error').style.display = 'block';
             }
+        }
+
+        // ฟังก์ชันเปิดจดหมายลับ -> สั่งเปิดเพลง PUN ที่นาที 1:04 (64 วินาที)
+        function openModal() { 
+            document.getElementById('secret-modal').style.display = 'flex'; 
+            
+            const punMusic = document.getElementById('pun-music');
+            if (!punMusic.src) {
+                // start=64 คือนาทีที่ 1:04
+                punMusic.src = "https://www.youtube-nocookie.com/embed/1OMZrYHIim8?autoplay=1&start=64";
+                punMusic.style.display = "block"; // แสดงตัวเล่นเพลงจิ๋วไว้ในการ์ดจดหมาย
+            }
+        }
+
+        function closeModal() { 
+            document.getElementById('secret-modal').style.display = 'none'; 
         }
 
         function startTimer() {
@@ -319,9 +313,6 @@
                     `เรารักกันมา <b>${days}</b> วัน <b>${hours}</b> ชม. <b>${minutes}</b> นาที <b>${seconds}</b> วิ แล้วนะ 💕`;
             }, 1000);
         }
-
-        function openModal() { document.getElementById('secret-modal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('secret-modal').style.display = 'none'; }
 
         function createHearts() {
             setInterval(() => {
