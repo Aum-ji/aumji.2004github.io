@@ -45,7 +45,7 @@
         .lock-card h2 { font-family: 'Mitr', sans-serif; color: #ff5277; font-size: 1.6rem; margin-bottom: 8px; }
         .lock-card p { font-size: 0.9rem; color: #888; margin-bottom: 20px; }
 
-        input[type="password"], input[type="text"] {
+        input[type="password"] {
             width: 100%;
             padding: 14px;
             border: 2px solid #ffccd5;
@@ -94,18 +94,22 @@
             color: white;
             text-shadow: 0 3px 10px rgba(255, 71, 87, 0.3);
             margin-bottom: 15px;
-            word-break: keep-all;
         }
 
-        .header-title h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
+        .header-title h1 { font-size: 1.8rem; margin-bottom: 5px; }
+        .header-title p { font-weight: 300; font-size: 1rem; line-height: 1.5; }
 
-        .header-title p {
-            font-weight: 300;
-            font-size: 1rem;
-            line-height: 1.5;
+        /* ⏰ Love Counter Box */
+        .timer-box {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            padding: 12px 15px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            color: #ff5277;
+            font-weight: 500;
+            font-size: 0.95rem;
         }
 
         /* Video Player Frame Container */
@@ -114,23 +118,61 @@
             padding: 8px;
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            margin: 0 auto 20px auto;
+            margin: 0 auto 15px auto;
             border: 4px solid #fff;
             position: relative;
             width: 100%;
-            padding-bottom: 177.77%; /* ทรง 9:16 แนวตั้ง */
+            padding-bottom: 177.77%;
             height: 0;
             overflow: hidden;
         }
 
         .video-box iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             border-radius: 18px;
         }
+
+        /* 💌 Secret Letter Button & Modal */
+        .btn-letter {
+            background: white;
+            color: #ff5277;
+            border: 2px solid #ff5277;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .btn-letter:hover {
+            background: #ff5277;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 25px;
+            max-width: 350px;
+            text-align: center;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         /* Heart Animation */
         .heart {
@@ -162,11 +204,16 @@
         </div>
     </div>
 
-    <!-- 💖 หน้าแสดงวิดีโอเมื่อใส่รหัสถูก -->
+    <!-- 💖 หน้าแสดงเนื้อหาหลัก -->
     <div id="main-content">
         <div class="header-title">
             <h1>Happy Anniversary! 🎉</h1>
-            <p>ขอบคุณที่เข้ามาเป็นความสุขในทุกๆวันนะ<br>คุณอัจฉราพร ❤️</p>
+            <p> ขอบคุณที่เข้ามาเป็นความสุขในทุกๆวันนะ<br>คุณอัจราพร ❤️</p>
+        </div>
+
+        <!-- ⏰ กล่องนับเวลาที่รักกัน -->
+        <div class="timer-box" id="timer">
+            เรารักกันมาแล้ว... 💕
         </div>
 
         <!-- 🎥 กล่องฝังวิดีโอ YouTube Shorts -->
@@ -181,13 +228,30 @@
             </iframe>
         </div>
 
-        <p style="color: white; font-size: 0.95rem; text-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 10px; line-height: 1.4;">
+        <p style="color: white; font-size: 0.95rem; text-shadow: 0 2px 5px rgba(0,0,0,0.1); line-height: 1.4;">
             ✨ ที่ผ่านมามีความสุขมากๆเลยนะ ถึงจะดื้อไปหน่อยแต่รักมากๆนะ ✨
         </p>
+
+        <!-- 💌 ปุ่มจดหมายลับ -->
+        <button class="btn-letter" onclick="openModal()">📩 กดเปิดจดหมายลับตรงนี้สิ</button>
+    </div>
+
+    <!-- 💌 ป๊อปอัปจดหมายลับ -->
+    <div id="secret-modal" class="modal">
+        <div class="modal-content">
+            <h3 style="color: #ff5277; margin-bottom: 10px;">ถึงคุณอัจราพร 🌸</h3>
+            <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 15px;">
+                ขอบคุณสำหรับทุกๆ รอยยิ้ม ความเข้าอกเข้าใจ และความรักที่มีให้กันเสมอมานะ ❤️
+            </p>
+            <button class="btn-unlock" style="margin-top:0;" onclick="closeModal()">ปิดจดหมาย ✨</button>
+        </div>
     </div>
 
     <script>
         const SECRET_CODE = "2409";
+        
+        // 🛠️ ใส่วันที่เริ่มคบกันตรงนี้ครับ (ปี-เดือน-วัน) เช่น 2023-09-24
+        const START_DATE = new Date("2025-09-24"); 
 
         function unlock() {
             const input = document.getElementById('passcode').value;
@@ -195,15 +259,34 @@
                 document.getElementById('lock-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 
-                // อัปเดต ID วิดีโอใหม่ Ivi69MXK8gA
                 const player = document.getElementById('yt-player');
                 player.src = "https://www.youtube-nocookie.com/embed/Ivi69MXK8gA?autoplay=1&playlist=Ivi69MXK8gA&loop=1&controls=1";
 
                 createHearts();
+                startTimer();
             } else {
                 document.getElementById('error').style.display = 'block';
             }
         }
+
+        // ระบบนับเวลาที่รักกัน
+        function startTimer() {
+            setInterval(() => {
+                const now = new Date();
+                const diff = now - START_DATE;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / 1000 / 60) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+
+                document.getElementById('timer').innerHTML = 
+                    `เรารักกันมา <b>${days}</b> วัน <b>${hours}</b> ชม. <b>${minutes}</b> นาที <b>${seconds}</b> วิ แล้วนะ 💕`;
+            }, 1000);
+        }
+
+        function openModal() { document.getElementById('secret-modal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('secret-modal').style.display = 'none'; }
 
         function createHearts() {
             setInterval(() => {
