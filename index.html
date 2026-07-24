@@ -112,7 +112,7 @@
             font-size: 0.85rem;
         }
 
-        /* 🎥 Video Player Frame Container (ปรับอัตราส่วนแนวตั้ง 9:16 พอดีเป๊ะ) */
+        /* 🎥 Video Player Frame Container */
         .video-box {
             background: white;
             padding: 6px;
@@ -122,7 +122,7 @@
             border: 3px solid #fff;
             position: relative;
             width: 100%;
-            aspect-ratio: 9 / 16; /* กำหนดสัดส่วนแนวตั้งสำหรับ Shorts */
+            aspect-ratio: 9 / 16;
             overflow: hidden;
         }
 
@@ -183,6 +183,15 @@
             pointer-events: none;
         }
 
+        /* ซ่อน Player ของ PUN แบบสมบูรณ์ */
+        .hidden-player {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+        }
+
         @keyframes float {
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
@@ -215,7 +224,7 @@
             เรารักกันมาแล้ว... 💕
         </div>
 
-        <!-- 🎥 กล่องฝังวิดีโอ YouTube Shorts (ขนาดพอดีจอ 9:16) -->
+        <!-- 🎥 กล่องฝังวิดีโอ YouTube Shorts -->
         <div class="video-box">
             <div id="shorts-player"></div>
         </div>
@@ -225,24 +234,25 @@
         </p>
 
         <!-- 💌 ปุ่มจดหมายลับ -->
-        <button class="btn-letter" onclick="openModal()">📩 กดเปิดจดหมายลับ (เปิดเพลง PUN)</button>
+        <button class="btn-letter" onclick="openModal()">📩 กดเปิดจดหมายลับ</button>
     </div>
 
-    <!-- 💌 ป๊อปอัปจดหมายลับ + เครื่องเล่นเพลง PUN -->
+    <!-- 💌 ป๊อปอัปจดหมายลับ (ไร้วิดีโอบดบัง) -->
     <div id="secret-modal" class="modal">
         <div class="modal-content">
-            <h3 style="color: #ff5277; margin-bottom: 10px;">ถึงคุณอัจราพร 🌸</h3>
+            <h3 style="color: #ff5277; margin-bottom: 12px;">ถึงคุณอัจราพร 🌸</h3>
             
-            <div style="background: #fff0f3; padding: 12px; border-radius: 15px; margin-bottom: 12px; font-size: 0.85rem; color: #ff5277; line-height: 1.5;">
-                🎶 <b>รักให้เธอได้รู้ (Proof) - PUN</b>
+            <div style="background: #fff0f3; padding: 12px; border-radius: 15px; margin-bottom: 18px; font-size: 0.85rem; color: #ff5277; line-height: 1.5; font-weight: 500;">
+                🎵 🎵 🎵<br>
+                <b>รักให้เธอได้รู้ (Proof) - PUN</b>
             </div>
 
-            <!-- กล่องเล่นเพลง PUN -->
-            <div style="border-radius: 12px; overflow: hidden; margin-bottom: 15px; height: 80px;">
+            <!-- ซ่อน YouTube Player ของเพลง PUN ไว้เบื้องหลัง -->
+            <div class="hidden-player">
                 <div id="pun-player"></div>
             </div>
 
-            <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 15px;">
+            <p style="font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 20px; text-align: center;">
                 ขอบคุณสำหรับทุกๆ รอยยิ้ม ความเข้าอกเข้าใจ และความรักที่มีให้กันเสมอมานะ รักนะครับ ❤️
             </p>
             <button class="btn-unlock" style="margin-top:0;" onclick="closeModal()">ปิดจดหมาย ✨</button>
@@ -274,13 +284,13 @@
             });
 
             punPlayer = new YT.Player('pun-player', {
-                height: '80',
-                width: '100%',
+                height: '0',
+                width: '0',
                 videoId: '1OMZrYHIim8',
                 playerVars: {
                     'autoplay': 0,
-                    'controls': 1,
-                    'start': 64
+                    'controls': 0,
+                    'start': 64 // เล่นนาทีที่ 1:04
                 }
             });
         }
@@ -311,10 +321,12 @@
         function openModal() { 
             document.getElementById('secret-modal').style.display = 'flex'; 
             
+            // หยุดคลิป Shorts หน้าแรก
             if (shortsPlayer && shortsPlayer.pauseVideo) {
                 shortsPlayer.pauseVideo();
             }
 
+            // เล่นเพลง PUN ที่นาที 1:04 ในพื้นหลัง
             if (punPlayer && punPlayer.seekTo) {
                 punPlayer.seekTo(64, true);
                 punPlayer.playVideo();
