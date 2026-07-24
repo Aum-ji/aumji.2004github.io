@@ -112,6 +112,22 @@
             font-size: 0.95rem;
         }
 
+        /* 🎵 Music Player Card */
+        .music-card {
+            background: white;
+            border-radius: 20px;
+            padding: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .music-card p {
+            font-size: 0.85rem;
+            color: #ff5277;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
         /* Video Player Frame Container */
         .video-box {
             background: white;
@@ -212,6 +228,20 @@
             เรารักกันมาแล้ว... 💕
         </div>
 
+        <!-- 🎵 กล่องเครื่องเล่นเพลงรัก -->
+        <div class="music-card">
+            <p>🎶 เพลงของเรา: ข้างกัน (City) - Three Man Down</p>
+            <iframe 
+                id="bg-music"
+                width="100%" 
+                height="80" 
+                src="" 
+                title="Three Man Down" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+            </iframe>
+        </div>
+
         <!-- 🎥 กล่องฝังวิดีโอ YouTube Shorts -->
         <div class="video-box">
             <iframe 
@@ -232,9 +262,6 @@
         <button class="btn-letter" onclick="openModal()">📩 กดเปิดจดหมายลับตรงนี้สิ</button>
     </div>
 
-    <!-- 🎵 เครื่องเล่นเพลงซ่อนไว้ (เพลง ข้างกัน - Three Man Down) -->
-    <iframe id="bg-music" src="" allow="autoplay" style="display:none;"></iframe>
-
     <!-- 💌 ป๊อปอัปจดหมายลับ -->
     <div id="secret-modal" class="modal">
         <div class="modal-content">
@@ -246,7 +273,7 @@
             </div>
 
             <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 15px;">
-                ขอบคุณสำหรับทุกๆ รอยยิ้ม ความเข้าอกเข้าใจ และความรักที่มีให้กันเสมอมานะ  รักนะครับ ❤️
+                ขอบคุณสำหรับทุกๆ รอยยิ้ม ความเข้าอกเข้าใจ และความรักที่มีให้กันเสมอมานะ รักนะครับ ❤️
             </p>
             <button class="btn-unlock" style="margin-top:0;" onclick="closeModal()">ปิดจดหมาย ✨</button>
         </div>
@@ -262,13 +289,13 @@
                 document.getElementById('lock-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 
-                // 1. โหลดวิดีโอ Shorts
+                // โหลดวิดีโอ Shorts
                 const player = document.getElementById('yt-player');
                 player.src = "https://www.youtube-nocookie.com/embed/Ivi69MXK8gA?autoplay=1&playlist=Ivi69MXK8gA&loop=1&controls=1";
 
-                // 2. สั่งเล่นเพลง ข้างกัน - Three Man Down เป็นเพลงหลังทันที!
+                // โหลดเพลง Three Man Down แบบมีแถบควบคุมให้กดเล่นได้ชัวร์ๆ
                 const music = document.getElementById('bg-music');
-                music.src = "https://www.youtube.com/embed/Z4N8vZqd_y0?autoplay=1&loop=1&playlist=Z4N8vZqd_y0";
+                music.src = "https://www.youtube.com/embed/Z4N8vZqd_y0?autoplay=1";
 
                 createHearts();
                 startTimer();
