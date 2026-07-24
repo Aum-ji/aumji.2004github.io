@@ -147,10 +147,7 @@
             font-weight: 500;
         }
 
-        .btn-letter:hover {
-            background: #ff5277;
-            color: white;
-        }
+        .btn-letter:hover { background: #ff5277; color: white; }
 
         .modal {
             display: none;
@@ -174,7 +171,6 @@
 
         @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* Heart Animation */
         .heart {
             position: fixed;
             font-size: 20px;
@@ -208,7 +204,7 @@
     <div id="main-content">
         <div class="header-title">
             <h1>Happy Anniversary! 🎉</h1>
-            <p> ขอบคุณที่เข้ามาเป็นความสุขในทุกๆวันนะ<br>คุณอัจราพร ❤️</p>
+            <p>ขอบคุณที่เข้ามาเป็นความสุขในทุกๆวันนะ<br>คุณอัจราพร ❤️</p>
         </div>
 
         <!-- ⏰ กล่องนับเวลาที่รักกัน -->
@@ -232,29 +228,33 @@
             ✨ ที่ผ่านมามีความสุขมากๆเลยนะ ถึงจะดื้อไปหน่อยแต่รักมากๆนะ ✨
         </p>
 
-        <!-- 💌 ป๊อปอัปจดหมายลับ -->
-<div id="secret-modal" class="modal">
-    <div class="modal-content">
-        <h3 style="color: #ff5277; margin-bottom: 10px;">ถึงคุณอัจราพร 🌸</h3>
-        
-        <!-- 🎵 ท่อนเพลงรัก Three Man Down -->
-        <div style="background: #fff0f3; padding: 12px; border-radius: 15px; margin-bottom: 15px; font-size: 0.85rem; color: #ff5277; line-height: 1.5;">
-            🎶 <b>ข้างกัน (City) - Three Man Down</b><br>
-            <i>"อยากให้อยู่ข้างกันแบบนี้ในทุกๆ วัน ขอบคุณที่เข้ามาเป็นความสดใสให้นะครับ ❤️"</i>
-        </div>
-
-        <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 15px;">
-            ขอบคุณสำหรับทุกๆ รอยยิ้ม ความเข้าอกเข้าใจ และความรักที่มีให้กันเสมอมานะ รักนะครับ ❤️
-        </p>
-        <button class="btn-unlock" style="margin-top:0;" onclick="closeModal()">ปิดจดหมาย ✨</button>
+        <!-- 💌 ปุ่มจดหมายลับ -->
+        <button class="btn-letter" onclick="openModal()">📩 กดเปิดจดหมายลับตรงนี้สิ</button>
     </div>
-</div>
+
+    <!-- 🎵 เครื่องเล่นเพลงซ่อนไว้ (เพลง ข้างกัน - Three Man Down) -->
+    <iframe id="bg-music" src="" allow="autoplay" style="display:none;"></iframe>
+
+    <!-- 💌 ป๊อปอัปจดหมายลับ -->
+    <div id="secret-modal" class="modal">
+        <div class="modal-content">
+            <h3 style="color: #ff5277; margin-bottom: 10px;">ถึงคุณอัจราพร 🌸</h3>
+            
+            <div style="background: #fff0f3; padding: 12px; border-radius: 15px; margin-bottom: 15px; font-size: 0.85rem; color: #ff5277; line-height: 1.5;">
+                🎶 <b>ข้างกัน (City) - Three Man Down</b><br>
+                <i>"อยากให้อยู่ข้างกันแบบนี้ในทุกๆ วัน ขอบคุณที่เข้ามาเป็นความสดใสให้นะครับ ❤️"</i>
+            </div>
+
+            <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 15px;">
+                ขอบคุณสำหรับทุกๆ รอยยิ้ม ความเข้าอกเข้าใจ และความรักที่มีให้กันเสมอมานะ  รักนะครับ ❤️
+            </p>
+            <button class="btn-unlock" style="margin-top:0;" onclick="closeModal()">ปิดจดหมาย ✨</button>
+        </div>
+    </div>
 
     <script>
         const SECRET_CODE = "2409";
-        
-        // 🛠️ ใส่วันที่เริ่มคบกันตรงนี้ครับ (ปี-เดือน-วัน) เช่น 2023-09-24
-        const START_DATE = new Date("2025-09-24"); 
+        const START_DATE = new Date("2025-09-24T00:00:00"); 
 
         function unlock() {
             const input = document.getElementById('passcode').value;
@@ -262,8 +262,13 @@
                 document.getElementById('lock-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 
+                // 1. โหลดวิดีโอ Shorts
                 const player = document.getElementById('yt-player');
                 player.src = "https://www.youtube-nocookie.com/embed/Ivi69MXK8gA?autoplay=1&playlist=Ivi69MXK8gA&loop=1&controls=1";
+
+                // 2. สั่งเล่นเพลง ข้างกัน - Three Man Down เป็นเพลงหลังทันที!
+                const music = document.getElementById('bg-music');
+                music.src = "https://www.youtube.com/embed/Z4N8vZqd_y0?autoplay=1&loop=1&playlist=Z4N8vZqd_y0";
 
                 createHearts();
                 startTimer();
@@ -272,7 +277,6 @@
             }
         }
 
-        // ระบบนับเวลาที่รักกัน
         function startTimer() {
             setInterval(() => {
                 const now = new Date();
