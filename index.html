@@ -80,7 +80,7 @@
         #main-content {
             display: none;
             width: 100%;
-            max-width: 400px; /* ปรับความกว้างให้เหมาะกับวิดีโอแนวตั้ง */
+            max-width: 380px;
             padding: 20px;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
@@ -95,7 +95,7 @@
             margin-bottom: 15px;
         }
 
-        /* Video Player Frame Container (สำหรับ Shorts แนวตั้ง 9:16) */
+        /* Video Player Frame Container */
         .video-box {
             background: white;
             padding: 8px;
@@ -104,7 +104,7 @@
             margin-bottom: 20px;
             border: 4px solid #fff;
             position: relative;
-            padding-bottom: 177.77%; /* อัตราส่วน 9:16 สำหรับแนวตั้ง */
+            padding-bottom: 177.77%; /* ทรง 9:16 แนวตั้ง */
             height: 0;
             overflow: hidden;
         }
@@ -141,10 +141,10 @@
         <div class="lock-card">
             <div style="font-size: 3rem; margin-bottom: 10px;">💌</div>
             <h2>Our Secret Code</h2>
-            <p>กรอกวันครบรอบของเราเพื่อปลดล็อกความทรงจำ ❤️</p>
+            <p>กรอกวันครบรอบ ไม่ถูกไม่ต้องมาอุบล </p>
             <input type="password" id="passcode" placeholder="••••">
             <button class="btn-unlock" onclick="unlock()">เปิดดูวิดีโอ 🎬</button>
-            <p id="error" style="color: #ff4757; font-size: 0.85rem; margin-top: 12px; display: none;">รหัสไม่ถูกต้อง ลองใหม่อีกทีนะคนดี!</p>
+            <p id="error" style="color: #ff4757; font-size: 0.85rem; margin-top: 12px; display: none;">รหัสไม่ถูกต้อง ลืมแล้วหรอคนยโส!</p>
         </div>
     </div>
 
@@ -152,14 +152,15 @@
     <div id="main-content">
         <div class="header-title">
             <h1 style="font-size: 1.8rem;">Happy Anniversary! 🎉</h1>
-            <p style="font-weight: 300;">ขอบคุณที่เข้ามาเป็นความสุขในทุกๆ วันนะ ❤️</p>
+            <p style="font-weight: 300;">ขอบคุณที่เข้ามาเป็นความสุขในทุกๆวันนะ คุณอัจราพร ❤️</p>
         </div>
 
         <!-- 🎥 กล่องฝังวิดีโอ YouTube Shorts -->
         <div class="video-box">
             <iframe 
-                src="https://www.youtube.com/embed/QVzNrKOiMGc?autoplay=1&rel=0" 
-                title="YouTube video player" 
+                id="yt-player"
+                src="" 
+                title="YouTube Shorts" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen>
@@ -167,12 +168,12 @@
         </div>
 
         <p style="color: white; font-size: 0.95rem; text-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 10px;">
-            ✨ ที่ผ่านมามีความสุขมากๆ เลยนะ อยู่ด้วยกันแบบนี้นานๆ เลยนะ ✨
+            ✨ ที่ผ่านมามีความสุขมากๆเลยนะ ถึงจะดื้อไปหน่อยแต่รักมากๆนะ ✨
         </p>
     </div>
 
     <script>
-        // 🛠️ เปลี่ยนรหัสผ่านตรงนี้ได้เลยนะครับ (เช่น "1234")
+        // 🛠️ เปลี่ยนรหัสผ่านตรงนี้ได้เลยครับ (เช่น "1234")
         const SECRET_CODE = "2409";
 
         function unlock() {
@@ -180,6 +181,11 @@
             if (input === SECRET_CODE) {
                 document.getElementById('lock-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
+                
+                // ใส่รหัสวิดีโอตัวใหม่ mqEOOHuCaeg
+                const player = document.getElementById('yt-player');
+                player.src = "https://youtube.com/shorts/mqEOOHuCaeg?feature=share";
+
                 createHearts();
             } else {
                 document.getElementById('error').style.display = 'block';
