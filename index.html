@@ -112,7 +112,7 @@
             font-size: 0.95rem;
         }
 
-        /* 🎵 Music Player Card */
+        /* 🎵 Music Player Bar */
         .music-card {
             background: white;
             border-radius: 20px;
@@ -228,15 +228,15 @@
             เรารักกันมาแล้ว... 💕
         </div>
 
-        <!-- 🎵 กล่องเครื่องเล่นเพลงรัก -->
+        <!-- 🎵 กล่องเล่นเพลงรัก PUN - Proof -->
         <div class="music-card">
-            <p>🎶 เพลงของเรา: ข้างกัน (City) - Three Man Down</p>
+            <p>🎶 เพลงของเรา: PUN - รักให้เธอได้รู้ (Proof)</p>
             <iframe 
                 id="bg-music"
                 width="100%" 
                 height="80" 
                 src="" 
-                title="Three Man Down" 
+                title="PUN - Proof" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
             </iframe>
@@ -268,8 +268,9 @@
             <h3 style="color: #ff5277; margin-bottom: 10px;">ถึงคุณอัจราพร 🌸</h3>
             
             <div style="background: #fff0f3; padding: 12px; border-radius: 15px; margin-bottom: 15px; font-size: 0.85rem; color: #ff5277; line-height: 1.5;">
-                🎶 <b>ข้างกัน (City) - Three Man Down</b><br>
-                <i>"อยากให้อยู่ข้างกันแบบนี้ในทุกๆ วัน ขอบคุณที่เข้ามาเป็นความสดใสให้นะครับ ❤️"</i>
+                🎶 <b>รักให้เธอได้รู้ (Proof) - PUN</b><br>
+                <i>"แค่อยากให้เธอได้รู้ความรักเป็นยังไง<br>
+                ให้เธอมองทางนี้ baby look into my eyes..." ❤️</i>
             </div>
 
             <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 15px;">
@@ -289,13 +290,13 @@
                 document.getElementById('lock-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 
-                // โหลดวิดีโอ Shorts
+                // 1. โหลดวิดีโอ Shorts
                 const player = document.getElementById('yt-player');
                 player.src = "https://www.youtube-nocookie.com/embed/Ivi69MXK8gA?autoplay=1&playlist=Ivi69MXK8gA&loop=1&controls=1";
 
-                // โหลดเพลง Three Man Down แบบมีแถบควบคุมให้กดเล่นได้ชัวร์ๆ
+                // 2. โหลดเพลง PUN - รักให้เธอได้รู้ (Proof) เริ่มท่อนฮุกที่ 0:34
                 const music = document.getElementById('bg-music');
-                music.src = "https://www.youtube.com/embed/Z4N8vZqd_y0?autoplay=1";
+                music.src = "https://www.youtube.com/embed/1OMZrYHIim8?autoplay=1&start=34";
 
                 createHearts();
                 startTimer();
